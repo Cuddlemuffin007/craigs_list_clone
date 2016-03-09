@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+from pkmn_app.models import City, AccountProfile
+
+admin.site.register([AccountProfile, City])
