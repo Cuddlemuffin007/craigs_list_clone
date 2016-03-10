@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div>{{ object.user }}</div>
+    <div>
+        <h5>City Preferences</h5>
+        {% for city in object.preferred_cities.all %}
+            <div>{{ city.name }}</div>
+        {% empty %}
+            <div>No preferred cities selected</div>
+        {% endfor %}
+        <a href="{% url 'update_preferences_view' object.pk %}">Edit Preferences</a>
+    </div>
+{% endblock %}

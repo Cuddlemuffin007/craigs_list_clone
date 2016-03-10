@@ -15,9 +15,19 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from pkmn_app.views import Home
+from django.contrib.auth import views as auth_views
+from django.contrib.auth.decorators import login_required
+
+from pkmn_app.views import Home, SignUpView, AccountProfileView, UpdateAccountProfileView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', Home.as_view(), name='home_view')
+    url(r'^$', Home.as_view(), name='home_view'),
+    url(r'^login/', auth_views.login, name='login_view'),
+    url(r'^logout/', auth_views.logout_then_login, name='logout_view'),
+    url(r'^sign_up/', SignUpView.as_view(), name='sign_up_view'),
+    url(r'^account_profile/(?P<pk>\d+)',
+        login_required(AccountProfileView.as_view()), name='account_detail_view'),
+    url(r'^update_account_profile/(?P<pk>\d+)',
+        login_required(UpdateAccountProfileView.as_view()), name='update_preferences_view')
 ]

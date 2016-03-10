@@ -3,14 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Base HTML</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 </head>
 <body>
+    {% if request.user.is_authenticated %}
+    <ul class="nav nav-pills">
+        <li role="presentation"><a href="{% url 'account_detail_view' request.user.accountprofile.pk %}">My Account</a></li>
+        <li role="presentation"><a href="{% url 'logout_view' %}">Logout</a></li>
+    </ul>
+    {% else %}
+    <ul class="nav nav-pills">
+        <li role="presentation"><a href="{% url 'sign_up_view' %}">Create Account</a></li>
+        <li role="presentation"><a href="{% url 'login_view' %}">Login</a></li>
+    </ul>
+    {% endif %}
 
-Hello from BASE!!!!
-
-{% block content %}
-
-{% endblock %}
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
 
 </body>
 </html>
