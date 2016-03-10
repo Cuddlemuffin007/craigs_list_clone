@@ -3,10 +3,10 @@
 {% block content %}
     <ul>
         {% for category in categories %}
-            <li>{{ category }}</li>
+            <li><a href="{% url 'listing_by_category' category.pk %}">{{ category.pk }} {{ category }}</a></li>
                 <ul>
                     {% for subcat in category.subcategory_set.all %}
-                        <li>{{ subcat }}</li>
+                        <li><a href="{% url 'listing_by_subcategory' subcat.pk %}">{{ subcat.pk }} {{ subcat }}</a></li>
                     {% endfor %}
                 </ul>
         {% endfor %}

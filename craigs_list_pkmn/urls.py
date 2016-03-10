@@ -18,7 +18,8 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
 
-from pkmn_app.views import Home, SignUpView, AccountProfileView, UpdateAccountProfileView
+from pkmn_app.views import Home, SignUpView, AccountProfileView, UpdateAccountProfileView, \
+    SubCategoryListingView, CategoryListingView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -29,5 +30,7 @@ urlpatterns = [
     url(r'^account_profile/(?P<pk>\d+)',
         login_required(AccountProfileView.as_view()), name='account_detail_view'),
     url(r'^update_account_profile/(?P<pk>\d+)',
-        login_required(UpdateAccountProfileView.as_view()), name='update_preferences_view')
+        login_required(UpdateAccountProfileView.as_view()), name='update_preferences_view'),
+    url(r'^category/(?P<cat_id>\d+)$', CategoryListingView.as_view(), name='listing_by_category'),
+    url(r'^category/subcategory/(?P<subcat_id>\d+)$', SubCategoryListingView.as_view(), name='listing_by_subcategory')
 ]

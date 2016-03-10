@@ -2,9 +2,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
-from django.views.generic import TemplateView, CreateView, DetailView, UpdateView
+from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, ListView
 
-from pkmn_app.models import AccountProfile, Category
+from pkmn_app.models import AccountProfile, Category, Pokemon, SubCategory
 
 
 class Home(TemplateView):
@@ -36,3 +36,17 @@ class UpdateAccountProfileView(UpdateView):
 
     def get_success_url(self):
         return reverse('account_detail_view', args=(self.request.user.accountprofile.pk,))
+
+
+class SubCategoryListingView(ListView):
+    model = Pokemon
+
+    def get_queryset(self):
+        return Pokemon.objects.filter(categories_id=self.kwargs['subcat_id'])
+
+
+class CategoryListingView(ListView):
+    model = Pokemon
+
+    def get_queryset(self):
+        return Pokemon.objects.filter(categories__category_id=self.kwargs.get('cat_id'))
