@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {{ object.category }} / {{ object }} / {{ object.pk }}
+    <div class="container">
+        {% for pokemon in object.pokemon_set.all %}
+            Lvl {{ pokemon.level }} {{ pokemon }} {{ pokemon.description }}
+        {% endfor %}
+    </div>
+    <div>
+        <a href="{% url 'listing_create_view' object.pk %}">Create Listing</a>
+    </div>
+{% endblock %}

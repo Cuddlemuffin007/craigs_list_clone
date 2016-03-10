@@ -1,8 +1,0 @@
-{% extends 'base.html' %}
-
-{% block content %}
-    {{ subcategory }}
-    {% for pokemon in pokemon_list %}
-        {{ pokemon.name }} {{ pokemon.description }}
-    {% endfor %}
-{% endblock %}

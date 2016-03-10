@@ -38,15 +38,22 @@ class UpdateAccountProfileView(UpdateView):
         return reverse('account_detail_view', args=(self.request.user.accountprofile.pk,))
 
 
-class SubCategoryListingView(ListView):
+class SubCategoryDetailView(DetailView):
+    model = SubCategory
+
+
+class ListingCreateView(CreateView):
     model = Pokemon
+    fields = ['name', 'description', 'level']
 
-    def get_queryset(self):
-        return Pokemon.objects.filter(categories_id=self.kwargs['subcat_id'])
+    def get_subcategory(self):
+        return SubCategory.objects.get(pk=self.kwargs['subcat_id'])
 
+    def form_valid(self, form):
+        pokemon_object = form.save(commit=False)
+        pokemon_object.trainer = self.request.user
+        pokemon_object.categories = self.get_subcategory()
+        return super().form_valid(form)
 
-class CategoryListingView(ListView):
-    model = Pokemon
-
-    def get_queryset(self):
-        return Pokemon.objects.filter(categories__category_id=self.kwargs.get('cat_id'))
+    def get_success_url(self):
+        return reverse('subcat_list_view', args=(self.kwargs.get('subcat_id'),))
