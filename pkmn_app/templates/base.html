@@ -9,6 +9,7 @@
     {% if request.user.is_authenticated %}
     <ul class="nav nav-pills">
         <li role="presentation"><a href="{% url 'account_detail_view' request.user.accountprofile.pk %}">My Account</a></li>
+        <li role="presentation"><a href="#">Browse Categories</a></li>
         <li role="presentation"><a href="{% url 'logout_view' %}">Logout</a></li>
     </ul>
     {% else %}

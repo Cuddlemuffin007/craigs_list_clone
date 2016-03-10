@@ -10,9 +10,31 @@ class City(models.Model):
         return self.name
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=10)
+    parent_category = models.ForeignKey('self', blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
 class AccountProfile(models.Model):
     user = models.OneToOneField('auth.User')
     preferred_cities = models.ManyToManyField(City)
+
+    def __str__(self):
+        return self.user.username
+
+
+class Pokemon(models.Model):
+    name = models.CharField(max_length=20)
+    description = models.TextField()
+    level = models.IntegerField()
+    trainer = models.ForeignKey('auth.User')
+    categories = models.ManyToManyField(Category)
+
+    def __str__(self):
+        return self.name
 
 
 @receiver(post_save, sender='auth.User')
