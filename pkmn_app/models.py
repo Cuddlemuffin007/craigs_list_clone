@@ -6,13 +6,29 @@ from django.dispatch import receiver
 class City(models.Model):
     name = models.CharField(max_length=15)
 
+    class Meta:
+        verbose_name_plural = "Cities"
+
     def __str__(self):
         return self.name
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=10)
-    parent_category = models.ForeignKey('self', blank=True, null=True)
+    name = models.CharField(max_length=15)
+
+    class Meta:
+        verbose_name_plural = "Categories"
+
+    def __str__(self):
+        return self.name
+
+
+class SubCategory(models.Model):
+    name = models.CharField(max_length=15)
+    category = models.ForeignKey(Category)
+
+    class Meta:
+        verbose_name_plural = "Sub-Categories"
 
     def __str__(self):
         return self.name
@@ -31,7 +47,10 @@ class Pokemon(models.Model):
     description = models.TextField()
     level = models.IntegerField()
     trainer = models.ForeignKey('auth.User')
-    categories = models.ManyToManyField(Category)
+    categories = models.ForeignKey(SubCategory, null=True)
+
+    class Meta:
+        verbose_name_plural = 'Pokemon'
 
     def __str__(self):
         return self.name

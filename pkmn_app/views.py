@@ -4,11 +4,16 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import render
 from django.views.generic import TemplateView, CreateView, DetailView, UpdateView
 
-from pkmn_app.models import AccountProfile
+from pkmn_app.models import AccountProfile, Category
 
 
 class Home(TemplateView):
-    template_name = 'base.html'
+    template_name = 'home.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
 
 
 class SignUpView(CreateView):
