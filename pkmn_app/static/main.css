@@ -1,0 +1,27 @@
+ul.nav.nav-pills {
+    text-align: right;
+}
+
+.nav-pills > li {
+    float: none;
+    display: inline-block;
+}
+
+.breadcrumbs {
+    padding: 1.2em 0;
+}
+
+.sorting {
+    text-align: left;
+    width: 80%;
+    padding: 1em;
+}
+
+.pokemon-listing {
+    padding: 1em 0;
+}
+
+.thumb {
+    height: 50px;
+    width: 50px;
+}
