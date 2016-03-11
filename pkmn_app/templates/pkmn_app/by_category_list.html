@@ -6,9 +6,9 @@
     {% for pokemon in pokemon_list %}
         <div>
             {% if pokemon.image %}
-                <img src="{{ MEDIA_URL }}{{ pokemon.image }}">
+                <img src="{{ MEDIA_URL }}{{ pokemon.image.url }}" alt="{{ pokemon.name }}">
             {% endif %}
-            <a href="{% url 'pokemon_detail_view' pokemon.pk %}">{{ pokemon }}</a>
+            <div>Lvl {{ pokemon.level }} <a href="{% url 'pokemon_detail_view' pokemon.pk %}">{{ pokemon }}</a></div>
         </div>
     {% empty %}
         There are no listings

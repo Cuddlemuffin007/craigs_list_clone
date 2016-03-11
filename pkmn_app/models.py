@@ -49,6 +49,7 @@ class Pokemon(models.Model):
     trainer = models.ForeignKey('auth.User')
     categories = models.ForeignKey(SubCategory, null=True)
     image = models.ImageField(null=True, upload_to='uploads')
+    posted = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name_plural = 'Pokemon'

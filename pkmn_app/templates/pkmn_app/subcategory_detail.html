@@ -6,9 +6,11 @@
         {% for pokemon in object.pokemon_set.all %}
             <div>
                 {% if pokemon.image %}
-                    <img src="{{ MEDIA_URL }}{{ pokemon.image }}">
+                    <img src="{{ MEDIA_URL }}{{ pokemon.image.url }}">
                 {% endif %}
-                <a href="{% url 'pokemon_detail_view' pokemon.pk %}">{{ pokemon }}</a>
+                <div>Lvl {{ pokemon.level }}
+                    <a href="{% url 'pokemon_detail_view' pokemon.pk %}">{{ pokemon }}</a>
+                </div>
             </div>
         {% endfor %}
     </div>
