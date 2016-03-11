@@ -25,3 +25,7 @@ ul.nav.nav-pills {
     height: 50px;
     width: 50px;
 }
+
+.username {
+    text-align: center;
+}
