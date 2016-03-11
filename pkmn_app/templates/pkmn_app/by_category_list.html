@@ -2,6 +2,11 @@
 
 {% block content %}
     <h3>{{ object }}</h3>
+    <div>Ordering:
+        <a href="{% url 'listing_by_cat_view' object.pk %}?order=level">Level Ascending</a>
+        <a href="{% url 'listing_by_cat_view' object.pk %}?order=-level">Level Descending</a>
+        <a href="{% url 'listing_by_cat_view' object.pk %}?order=-posted">Most Recent</a>
+    </div>
 
     {% for pokemon in pokemon_list %}
         <div>

@@ -41,6 +41,15 @@ class UpdateAccountProfileView(UpdateView):
 class SubCategoryDetailView(DetailView):
     model = SubCategory
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.GET.urlencode():
+            ordering = self.request.GET.urlencode()[6:]
+        else:
+            ordering = '-posted'
+        context['pokemon_list'] = context['subcategory'].pokemon_set.all().order_by(ordering)
+
+        return context
 
 class ListingCreateView(CreateView):
     model = Pokemon
@@ -65,7 +74,12 @@ class CategoryDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['pokemon_list'] = Pokemon.objects.filter(categories__category_id=self.kwargs.get('pk'))
+        if self.request.GET.urlencode():
+            ordering = self.request.GET.urlencode()[6:]
+        else:
+            ordering = '-posted'
+        context['pokemon_list'] = Pokemon.objects.filter(categories__category_id=self.kwargs.get('pk')).order_by(ordering)
+
         return context
 
 class PokemonDetailView(DetailView):

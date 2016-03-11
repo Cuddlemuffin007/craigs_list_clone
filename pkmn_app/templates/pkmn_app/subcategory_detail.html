@@ -2,8 +2,15 @@
 
 {% block content %}
     {{ object.category }} / {{ object }}
+
+    <div>Ordering:
+        <a href="{% url 'subcat_list_view' object.pk %}?order=level">Level Ascending</a>
+        <a href="{% url 'subcat_list_view' object.pk %}?order=-level">Level Descending</a>
+        <a href="{% url 'subcat_list_view' object.pk %}?order=-posted">Most Recent</a>
+    </div>
+
     <div class="container">
-        {% for pokemon in object.pokemon_set.all %}
+        {% for pokemon in pokemon_list %}
             <div>
                 {% if pokemon.image %}
                     <img src="{{ MEDIA_URL }}{{ pokemon.image.url }}">
