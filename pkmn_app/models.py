@@ -48,6 +48,7 @@ class Pokemon(models.Model):
     level = models.IntegerField()
     trainer = models.ForeignKey('auth.User')
     categories = models.ForeignKey(SubCategory, null=True)
+    image = models.ImageField(null=True, upload_to='uploads')
 
     class Meta:
         verbose_name_plural = 'Pokemon'

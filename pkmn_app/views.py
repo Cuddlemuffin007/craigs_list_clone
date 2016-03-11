@@ -44,7 +44,7 @@ class SubCategoryDetailView(DetailView):
 
 class ListingCreateView(CreateView):
     model = Pokemon
-    fields = ['name', 'description', 'level']
+    fields = ['name', 'description', 'level', 'image']
 
     def get_subcategory(self):
         return SubCategory.objects.get(pk=self.kwargs['subcat_id'])
@@ -57,3 +57,18 @@ class ListingCreateView(CreateView):
 
     def get_success_url(self):
         return reverse('subcat_list_view', args=(self.kwargs.get('subcat_id'),))
+
+
+class CategoryDetailView(DetailView):
+    model = Category
+    template_name = 'pkmn_app/by_category_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['pokemon_list'] = Pokemon.objects.filter(categories__category_id=self.kwargs.get('pk'))
+        return context
+
+class PokemonDetailView(DetailView):
+    model = Pokemon
+    template_name = 'pkmn_app/pokemon_detail.html'
+
