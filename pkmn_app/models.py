@@ -50,7 +50,7 @@ class Pokemon(models.Model):
     level = models.IntegerField()
     trainer = models.ForeignKey('auth.User')
     categories = models.ForeignKey(SubCategory, null=True)
-    image = models.ImageField(null=True, upload_to='uploads')
+    image = models.ImageField(blank=True, null=True, upload_to='uploads')
     posted = models.DateTimeField(auto_now_add=True)
 
     class Meta:
