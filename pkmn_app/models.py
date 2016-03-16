@@ -15,6 +15,7 @@ class City(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=15)
+    description = models.TextField(null=True, blank=True)
 
     class Meta:
         verbose_name_plural = "Categories"
@@ -26,6 +27,7 @@ class Category(models.Model):
 class SubCategory(models.Model):
     name = models.CharField(max_length=15)
     category = models.ForeignKey(Category)
+    description = models.TextField(null=True, blank=True)
 
     class Meta:
         verbose_name_plural = "Sub-Categories"

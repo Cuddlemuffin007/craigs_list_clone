@@ -1,5 +1,6 @@
 ul.nav.nav-pills {
     text-align: right;
+    padding-top: 10px;
 }
 
 .nav-pills > li {
@@ -32,4 +33,32 @@ ul.nav.nav-pills {
 
 label {
     display: block;
+}
+
+.header {
+    width: 85%;
+    margin: 0 auto;
+    padding-bottom: 10px;
+}
+
+.header > h2 {
+    float: left;
+    display: inline-block;
+}
+
+.site-title, .site-subtitle {
+    text-align: center;
+}
+
+.site-subtitle {
+    padding-bottom: 10px;
+}
+
+.site-name a:hover {
+    text-decoration: none;
+}
+
+.no-content-notice {
+    text-align: center;
+    color: gray;
 }

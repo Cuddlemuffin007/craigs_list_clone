@@ -1,16 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <h4 class="site-title">Welcome to PokeList</h4>
+    <p class="site-subtitle">
+        List your Pokemon or browse for others available for trading, training, or breeding.
+    </p>
+
 {% for category in categories %}
-    <div class="panel panel-default">
+   <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title"><a href={% url 'listing_by_cat_view' category.pk %}>{{ category }}</a></h3>
+            <h3 class="panel-title">
+                <a href={% url 'listing_by_cat_view' category.pk %}>{{ category }}</a> -
+                <small>{{ category.description }}</small>
+            </h3>
         </div>
         <div class="panel-body">
             {% for subcat in category.subcategory_set.all %}
                 <p><a href="{% url 'subcat_list_view' subcat.pk %}">{{ subcat }}</a></p>
             {% endfor %}
         </div>
+    </div>
+{% empty %}
+    <div class="no-content-notice">
+        <h1>Looks like there's no categories to display.</h1>
+        <h3>Contact the site admin to get some!</h3>
     </div>
 {% endfor %}
 {% endblock %}

@@ -10,16 +10,24 @@
 </head>
 <body>
     {% if request.user.is_authenticated %}
-    <ul class="nav nav-pills">
-        <li role="presentation"><a href="{% url 'account_detail_view' request.user.accountprofile.pk %}">My Account</a></li>
-        <li role="presentation"><a href="{% url 'home_view' %}">Browse Categories</a></li>
-        <li role="presentation"><a href="{% url 'logout_view' %}">Logout</a></li>
-    </ul>
+        <div class="header">
+            <h2 class="site-name"><a href="{% url 'home_view' %}">PokeList</a></h2>
+            <ul class="nav nav-pills">
+                <li role="presentation">
+                    <a href="{% url 'account_detail_view' request.user.accountprofile.pk %}">My Account</a>
+                </li>
+                <li role="presentation"><a href="{% url 'home_view' %}">Browse Categories</a></li>
+                <li role="presentation"><a href="{% url 'logout_view' %}">Logout</a></li>
+            </ul>
+        </div>
     {% else %}
-    <ul class="nav nav-pills">
-        <li role="presentation"><a href="{% url 'sign_up_view' %}">Create Account</a></li>
-        <li role="presentation"><a href="{% url 'login_view' %}">Login</a></li>
-    </ul>
+        <div class="header">
+            <h2 class="site-name"><a href="{% url 'home_view' %}">PokeList</a></h2>
+            <ul class="nav nav-pills">
+                <li role="presentation"><a href="{% url 'sign_up_view' %}">Create Account</a></li>
+                <li role="presentation"><a href="{% url 'login_view' %}">Login</a></li>
+            </ul>
+        </div>
     {% endif %}
 
     <div class="container">

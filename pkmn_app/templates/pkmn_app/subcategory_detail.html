@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h3 class="breadcrumbs">{{ object.category }} / {{ object }}
-        <span><a href="{% url 'listing_create_view' object.pk %}"><small>Create Listing</small></a></span>
+    <h3 class="breadcrumbs">{{ object.category }} / {{ object }} -
+        <small>{{ object.description }}</small>
+        <div>
+            <a href="{% url 'listing_create_view' object.pk %}"><small>Create Listing</small></a>
+        </div>
     </h3>
 
     <div class="row sorting">
