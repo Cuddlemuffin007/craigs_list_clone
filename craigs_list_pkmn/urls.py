@@ -19,13 +19,13 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
 
-from pkmn_app.views import Home, SignUpView, AccountProfileView, UpdateAccountProfileView, \
+from pkmn_app.views import SignUpView, AccountProfileView, UpdateAccountProfileView, \
     SubCategoryDetailView, ListingCreateView, CategoryDetailView, PokemonDetailView, SubCategoryGalleryView, \
-    SubCategoryThumbnailView
+    SubCategoryThumbnailView, CategoryListView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', Home.as_view(), name='home_view'),
+    url(r'^$', CategoryListView.as_view(), name='home_view'),
     url(r'^login/', auth_views.login, name='login_view'),
     url(r'^logout/', auth_views.logout_then_login, name='logout_view'),
     url(r'^sign_up/', SignUpView.as_view(), name='sign_up_view'),

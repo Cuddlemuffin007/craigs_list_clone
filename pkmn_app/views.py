@@ -1,19 +1,15 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from django.shortcuts import render
-from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, ListView
+from django.views.generic import CreateView, DetailView, UpdateView, ListView
 
 from pkmn_app.models import AccountProfile, Category, Pokemon, SubCategory
 
 
-class Home(TemplateView):
-    template_name = 'home.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['categories'] = Category.objects.all()
-        return context
+class CategoryListView(ListView):
+    model = Category
+    template_name = 'home.html'
 
 
 class SignUpView(CreateView):
