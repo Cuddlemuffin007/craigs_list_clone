@@ -89,3 +89,7 @@ class PokemonDetailView(DetailView):
 class SubCategoryGalleryView(SubCategoryDetailView):
     template_name = 'pkmn_app/subcategory_gallery.html'
 
+
+class SubCategoryThumbnailView(SubCategoryDetailView):
+    template_name = 'pkmn_app/subcategory_thumbnail.html'
+

@@ -20,7 +20,8 @@ from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
 
 from pkmn_app.views import Home, SignUpView, AccountProfileView, UpdateAccountProfileView, \
-    SubCategoryDetailView, ListingCreateView, CategoryDetailView, PokemonDetailView, SubCategoryGalleryView
+    SubCategoryDetailView, ListingCreateView, CategoryDetailView, PokemonDetailView, SubCategoryGalleryView, \
+    SubCategoryThumbnailView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -32,11 +33,12 @@ urlpatterns = [
         login_required(AccountProfileView.as_view()), name='account_detail_view'),
     url(r'^update_account_profile/(?P<pk>\d+)',
         login_required(UpdateAccountProfileView.as_view()), name='update_preferences_view'),
-    url(r'^subcategory/(?P<pk>\d+)/listings/$', SubCategoryDetailView.as_view(), name='subcat_thumb_view'),
+    url(r'^subcategory/(?P<pk>\d+)/listings/$', SubCategoryDetailView.as_view(), name='subcat_list_view'),
     url(r'^(?P<subcat_id>\d+)/create/listing/$',
         login_required(ListingCreateView.as_view()), name='listing_create_view'),
     url(r'^category/(?P<pk>\d+)/listings/$', CategoryDetailView.as_view(), name='listing_by_cat_view'),
     url(r'^media/(?P<path>.*)', "django.views.static.serve", {"document_root": settings.MEDIA_ROOT}),
     url(r'^pokemon/(?P<pk>\d+)/detail/$', PokemonDetailView.as_view(), name='pokemon_detail_view'),
-    url(r'^subcategory/(?P<pk>\d+)/gallery/$', SubCategoryGalleryView.as_view(), name='subcat_gallery_view')
+    url(r'^subcategory/(?P<pk>\d+)/gallery/$', SubCategoryGalleryView.as_view(), name='subcat_gallery_view'),
+    url(r'^subcategory/(?P<pk>\d+)/thumb/$', SubCategoryThumbnailView.as_view(), name='subcat_thumb_view'),
 ]
