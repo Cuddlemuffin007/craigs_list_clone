@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h3 class="breadcrumbs">{{ object.category }} / {{ object }} -
+        <small>{{ object.description }}</small>
+        <div>
+            <a href="{% url 'listing_create_view' object.pk %}"><small>Create Listing</small></a>
+        </div>
+    </h3>
+
+    <div class="row sorting">
+        <div class="col-md-2"><a href="{% url 'subcat_gallery_view' object.pk %}?order=level">Level Ascending</a></div>
+        <div class="col-md-2"><a href="{% url 'subcat_gallery_view' object.pk %}?order=-level">Level Descending</a></div>
+        <div class="col-md-2"><a href="{% url 'subcat_gallery_view' object.pk %}?order=-posted">Most Recent</a></div>
+        <div class="col-md-2"><a href="{% url 'subcat_thumb_view' object.pk %}">View as Thumbnail</a></div>
+        <div class="col-md-2"><a href="#">View as List</a></div>
+    </div>
+
+    <div class="row pokemon-listing">
+        {% for pokemon in pokemon_list %}
+            <a href="{% url 'pokemon_detail_view' pokemon.pk %}">
+                {% if pokemon.image %}
+                    <div class="col-md-2"><img class="gallery" src="{{ MEDIA_URL }}{{ pokemon.image.url }}"></div>
+                {% else %}
+                    <div class="col-md-2"><p>No Image</p><p>{{ pokemon.name }}</p></div>
+                {% endif %}
+            </a>
+        {% endfor %}
+    </div>
+
+{% endblock %}

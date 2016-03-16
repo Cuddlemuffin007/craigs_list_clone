@@ -5,6 +5,6 @@
         {% if pokemon.image %}
             <img src="{{ MEDIA_URL }}{{ pokemon.image.url }}" alt="{{ pokemon.name }}"></div>
         {% endif %}
-    <div><span>Lvl {{ pokemon.level }}</span> {{ pokemon.name }}</div>
-    <div>{{ pokemon.description }}</div>
+    <div class="pokemon-details"><span>Lvl {{ pokemon.level }}</span> {{ pokemon.name }}</div>
+    <div class="pokemon-description">{{ pokemon.description }}</div>
 {% endblock %}

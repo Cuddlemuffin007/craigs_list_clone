@@ -62,3 +62,15 @@ label {
     text-align: center;
     color: gray;
 }
+
+.pokemon-details {
+    font-size: large;
+    font-family: sans-serif;
+    font-weight: 700;
+}
+
+.pokemon-description {
+    font-family: sans-serif;
+    font-size: medium;
+    font-weight: 300;
+}

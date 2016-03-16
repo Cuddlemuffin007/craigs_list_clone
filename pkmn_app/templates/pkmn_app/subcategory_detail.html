@@ -9,9 +9,11 @@
     </h3>
 
     <div class="row sorting">
-        <div class="col-md-2"><a href="{% url 'subcat_list_view' object.pk %}?order=level">Level Ascending</a></div>
-        <div class="col-md-2"><a href="{% url 'subcat_list_view' object.pk %}?order=-level">Level Descending</a></div>
-        <div class="col-md-2"><a href="{% url 'subcat_list_view' object.pk %}?order=-posted">Most Recent</a></div>
+        <div class="col-md-2"><a href="{% url 'subcat_thumb_view' object.pk %}?order=level">Level Ascending</a></div>
+        <div class="col-md-2"><a href="{% url 'subcat_thumb_view' object.pk %}?order=-level">Level Descending</a></div>
+        <div class="col-md-2"><a href="{% url 'subcat_thumb_view' object.pk %}?order=-posted">Most Recent</a></div>
+        <div class="col-md-2"><a href="{% url 'subcat_gallery_view' object.pk %}">View as Gallery</a></div>
+        <div class="col-md-2"><a href="#">View as List</a></div>
     </div>
 
         {% for pokemon in pokemon_list %}

@@ -67,7 +67,7 @@ class ListingCreateView(CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('subcat_list_view', args=(self.kwargs.get('subcat_id'),))
+        return reverse('subcat_thumb_view', args=(self.kwargs.get('subcat_id'),))
 
 
 class CategoryDetailView(DetailView):
@@ -84,4 +84,8 @@ class CategoryDetailView(DetailView):
 class PokemonDetailView(DetailView):
     model = Pokemon
     template_name = 'pkmn_app/pokemon_detail.html'
+
+
+class SubCategoryGalleryView(SubCategoryDetailView):
+    template_name = 'pkmn_app/subcategory_gallery.html'
 
