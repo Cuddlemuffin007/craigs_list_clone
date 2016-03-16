@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <h3 class="breadcrumbs">{{ subcategory.category }} / {{ subcategory }}</h3>
 <form method="post" action="" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}

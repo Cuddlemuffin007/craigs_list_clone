@@ -43,10 +43,7 @@ class SubCategoryDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if self.request.GET.urlencode():
-            ordering = self.request.GET.urlencode()[6:]
-        else:
-            ordering = '-posted'
+        ordering = self.request.GET.get('order') if self.request.GET.get('order') else '-posted'
         context['pokemon_list'] = context['subcategory'].pokemon_set.all().order_by(ordering)
 
         return context
@@ -57,6 +54,11 @@ class ListingCreateView(CreateView):
 
     def get_subcategory(self):
         return SubCategory.objects.get(pk=self.kwargs['subcat_id'])
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['subcategory'] = self.get_subcategory()
+        return context
 
     def form_valid(self, form):
         pokemon_object = form.save(commit=False)
@@ -74,10 +76,7 @@ class CategoryDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if self.request.GET.urlencode():
-            ordering = self.request.GET.urlencode()[6:]
-        else:
-            ordering = '-posted'
+        ordering = self.request.GET.get('order') if self.request.GET.get('order') else '-posted'
         context['pokemon_list'] = Pokemon.objects.filter(categories__category_id=self.kwargs.get('pk')).order_by(ordering)
 
         return context
