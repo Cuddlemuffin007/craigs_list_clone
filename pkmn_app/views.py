@@ -2,9 +2,11 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.views.generic import CreateView, DetailView, UpdateView, ListView
+# REST Framework imports
+from rest_framework import generics
+from pkmn_app.serializers import CategorySerializer, SubCategorySerializer, PokemonSerializer
 
 from pkmn_app.models import AccountProfile, Category, Pokemon, SubCategory
-
 
 
 class CategoryListView(ListView):
@@ -44,6 +46,7 @@ class SubCategoryDetailView(DetailView):
 
         return context
 
+
 class ListingCreateView(CreateView):
     model = Pokemon
     fields = ['name', 'description', 'level', 'image']
@@ -77,6 +80,7 @@ class CategoryDetailView(DetailView):
 
         return context
 
+
 class PokemonDetailView(DetailView):
     model = Pokemon
     template_name = 'pkmn_app/pokemon_detail.html'
@@ -89,3 +93,35 @@ class SubCategoryGalleryView(SubCategoryDetailView):
 class SubCategoryThumbnailView(SubCategoryDetailView):
     template_name = 'pkmn_app/subcategory_thumbnail.html'
 
+
+# Begin API endpoint views
+
+class CategoryListAPIView(generics.ListAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+
+class SubCategoryListAPIView(generics.ListAPIView):
+    queryset = SubCategory.objects.all()
+    serializer_class = SubCategorySerializer
+
+
+class CategoryPokemonListAPIView(generics.ListAPIView):
+    serializer_class = PokemonSerializer
+
+    def get_queryset(self):
+        return Pokemon.objects.filter(categories__category_id=self.kwargs.get('pk'))
+
+
+class SubCategoryPokemonListAPIView(generics.ListAPIView):
+    serializer_class = PokemonSerializer
+
+    def get_queryset(self):
+        return Pokemon.objects.filter(categories=self.kwargs.get('pk'))
+
+
+class PokemonRetrieveAPIView(generics.RetrieveAPIView):
+    serializer_class = PokemonSerializer
+
+    def get_object(self):
+        return Pokemon.objects.get(pk=self.kwargs.get('pk'))
