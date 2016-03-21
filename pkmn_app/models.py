@@ -68,3 +68,4 @@ def create_account_profile(sender, **kwargs):
     if created:
         AccountProfile.objects.create(user=user_instance)
         Token.objects.create(user=user_instance)
+

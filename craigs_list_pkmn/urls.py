@@ -45,5 +45,7 @@ urlpatterns = [
     url(r'^api/subcategories/$', views.SubCategoryListAPIView.as_view(), name='subcat_list_api_view'),
     url(r'^api/subcategories/(?P<pk>\d+)/pokemon/$',
         views.SubCategoryPokemonListAPIView.as_view(), name='subcat_poke_list_api_view'),
-    url(r'^api/pokemon/(?P<pk>\d+)$', views.PokemonRetrieveAPIView.as_view(), name='poke_detail_api_view'),
+    url(r'^api/pokemon/$', views.PokemonCreateAPIView.as_view(), name='pokemon_create_api_view'),
+    url(r'^api/pokemon/(?P<pk>\d+)/$', views.PokemonRetrieveAPIView.as_view(), name='poke_detail_api_view'),
+    url(r'^api/pokemon/(?P<pk>\d+)/update/$', views.PokemonRetrieveUpdateAPIView.as_view(), name='poke_update_api_view')
 ]

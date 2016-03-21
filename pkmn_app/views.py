@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse
 from django.views.generic import CreateView, DetailView, UpdateView, ListView
 # REST Framework imports
 from rest_framework import generics
+from rest_framework.permissions import AllowAny
 from pkmn_app.serializers import CategorySerializer, SubCategorySerializer, PokemonSerializer
 
 from pkmn_app.models import AccountProfile, Category, Pokemon, SubCategory
@@ -99,15 +100,18 @@ class SubCategoryThumbnailView(SubCategoryDetailView):
 class CategoryListAPIView(generics.ListAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    permission_classes = (AllowAny,)
 
 
 class SubCategoryListAPIView(generics.ListAPIView):
     queryset = SubCategory.objects.all()
     serializer_class = SubCategorySerializer
+    permission_classes = (AllowAny,)
 
 
 class CategoryPokemonListAPIView(generics.ListAPIView):
     serializer_class = PokemonSerializer
+    permission_classes = (AllowAny,)
 
     def get_queryset(self):
         return Pokemon.objects.filter(categories__category_id=self.kwargs.get('pk'))
@@ -115,6 +119,7 @@ class CategoryPokemonListAPIView(generics.ListAPIView):
 
 class SubCategoryPokemonListAPIView(generics.ListAPIView):
     serializer_class = PokemonSerializer
+    permission_classes = (AllowAny,)
 
     def get_queryset(self):
         return Pokemon.objects.filter(categories=self.kwargs.get('pk'))
@@ -122,6 +127,19 @@ class SubCategoryPokemonListAPIView(generics.ListAPIView):
 
 class PokemonRetrieveAPIView(generics.RetrieveAPIView):
     serializer_class = PokemonSerializer
+    permission_classes = (AllowAny,)
 
     def get_object(self):
         return Pokemon.objects.get(pk=self.kwargs.get('pk'))
+
+
+class PokemonCreateAPIView(generics.CreateAPIView):
+    model = Pokemon
+    serializer_class = PokemonSerializer
+
+
+class PokemonRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
+    serializer_class = PokemonSerializer
+
+    def get_queryset(self):
+        return Pokemon.objects.get(pk=self.kwargs.get('pk'), trainer=self.request.user.pk)
