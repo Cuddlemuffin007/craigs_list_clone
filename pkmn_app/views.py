@@ -139,7 +139,8 @@ class PokemonCreateAPIView(generics.CreateAPIView):
 
 
 class PokemonRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
+    model = Pokemon
     serializer_class = PokemonSerializer
 
     def get_queryset(self):
-        return Pokemon.objects.get(pk=self.kwargs.get('pk'), trainer=self.request.user.pk)
+        return self.model.objects.filter(trainer=self.request.user.pk)
