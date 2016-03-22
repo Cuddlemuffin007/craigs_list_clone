@@ -134,8 +134,11 @@ class PokemonRetrieveAPIView(generics.RetrieveAPIView):
 
 
 class PokemonCreateAPIView(generics.CreateAPIView):
-    model = Pokemon
     serializer_class = PokemonSerializer
+
+    def create(self, request, *args, **kwargs):
+        request.data['trainer'] = request.user.pk
+        return super().create(request, *args, **kwargs)
 
 
 class PokemonRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
